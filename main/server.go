@@ -1,7 +1,7 @@
 package main
 
 import (
-	cache "github.com/rishiselvakumaran98/Distributed_Cache/tree/dev/cache"
+	cache "github.com/rishiselvakumaran98/Distributed_Cache/cache"
 	"fmt"
 	"log"
 )
