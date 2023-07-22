@@ -1,6 +1,6 @@
 package main
 
-import cache "rishiselvakumaran98.com/cache"
+import cache "github.com/rishiselvakumaran98/Distributed_Cache"
 
 func main() {
 	opts := ServerOpts {
