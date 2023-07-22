@@ -1,5 +1,5 @@
 build:
-	go build -o bin/ggcache
+	go build -o main/main.go
 
 run:
-	./bin/ggcache
+	./main/main.go
