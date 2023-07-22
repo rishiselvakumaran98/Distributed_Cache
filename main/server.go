@@ -1,7 +1,7 @@
 package main
 
 import (
-	cache "_/Users/rishiselvakumaran/Desktop/Projects/Distributed_Cache"
+	cache "rishiselvakumaran98.com/cache"
 	"fmt"
 	"log"
 )
