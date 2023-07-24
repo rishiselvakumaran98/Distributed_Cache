@@ -11,15 +11,15 @@ import (
 )
 func main() {
 	var (
-		listenAddr = flag.String("listenaddr", ":3000", "listen address of the serv")
-		leaderAddr = flag.String("leaderAddr", ":2000", "listen address of the leader")
+		listenAddr = flag.String("listenAddr", "", "listen address of the serv")
+		leaderAddr = flag.String("leaderAddr", "", "listen address of the leader")
 	)
 	
 	flag.Parse()
 	opts := ServerOpts {
 		ListenAddr: *listenAddr,
 		IsLeader: true,
-		LeaderAddr: *leaderAddr,
+		LeaderAddr: *leaderAddr, // we need runFollower to add the argument for this 
 	}
 	// We make a simple client
 	go func() {

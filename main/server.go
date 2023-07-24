@@ -20,6 +20,9 @@ type ServerOpts struct {
 type Server struct {
 	ServerOpts
 
+	followers map[net.Conn] struct{
+
+	}
 	cache cache.CacheSet // we reference of
 }
 
@@ -27,6 +30,8 @@ func NewServer(opts ServerOpts, c cache.CacheSet) *Server {
 	return &Server{
 		ServerOpts: opts,
 		cache:      c,
+		// TODO: only allocate this when we are the leader
+		followers: make(map[net.Conn]struct{}),
 	}
 }
 
@@ -37,6 +42,18 @@ func (s *Server) Start() error {
 	}
 
 	log.Printf("Server starting on port [%s]\n", s.ListenAddr)
+	// if the current node is not a leader than it Dials to the leader to open new connection 
+	if !s.IsLeader {
+		go func(){
+			conn, err := net.Dial("tcp", s.LeaderAddr)
+			fmt.Println("connected with Leader: ", s.LeaderAddr)
+			if err != nil {
+				log.Fatal(err)
+			}
+			s.handleConn(conn)
+		}()
+		
+	}
 
 	for {
 		conn, err := ln.Accept()
@@ -51,9 +68,8 @@ func (s *Server) Start() error {
 // Go routines
 func (s *Server) handleConn(conn net.Conn) {
 	// defer the connection from being closed when the listening port is still up
-	defer func() {
-		conn.Close()
-	}()
+	defer conn.Close()
+	
 	// In this code, `make` is used to create a new slice with a specified length and capacity.
 	buf := make([]byte, 2048)
 	for {
@@ -115,5 +131,13 @@ func (s *Server) handleGetCmd(conn net.Conn, msg *Message) ([]byte, error) {
 }
 
 func (s *Server) sendToFollowers(ctx context.Context, msg *Message) error {
+	// must be mutex protected
+	for conn := range s.followers {
+		_, err := conn.Write(msg.ToBytes())
+		if err != nil {
+			log.Printf("Write to followers failed %s", err)
+			continue
+		}
+	}
 	return nil
 }

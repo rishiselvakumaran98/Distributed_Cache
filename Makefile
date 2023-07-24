@@ -3,3 +3,6 @@ build:
 
 run: build
 	./bin/ggcache
+
+runFollower: build
+	./bin/ggcache --listenAddr :4000 --leaderAddr :3000
