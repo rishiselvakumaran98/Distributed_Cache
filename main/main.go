@@ -11,7 +11,7 @@ import (
 )
 func main() {
 	var (
-		listenAddr = flag.String("listenAddr", "", "listen address of the serv")
+		listenAddr = flag.String("listenAddr", ":3000", "listen address of the serv")
 		leaderAddr = flag.String("leaderAddr", "", "listen address of the leader")
 	)
 	
