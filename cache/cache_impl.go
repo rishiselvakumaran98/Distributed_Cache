@@ -2,6 +2,7 @@ package cache
 
 import (
 	"fmt"
+	"log"
 	"sync"
 	"time"
 )
@@ -42,9 +43,15 @@ func (c* Cache) Get(key []byte) ([]byte, error) {
 func (c* Cache) Set(key, value []byte, ttl time.Duration) error {
 	c.lock.Lock()
 	defer c.lock.Unlock()
-
 	c.data[string(key)] = value
-	// TODO: if the cache memory constraint hits then we must return Error
+	fmt.Printf("SET %s to %s\n", string(key), string(value))
+	// This portion activates as the TTL to delete the entries after a certain period of time
+	// alternatively we can use tinker = time.NewTicker(ttl)
+	// within the go func method we call <-tinker.C
+	go func() {
+		<-time.After(ttl)
+		delete(c.data, string(key))
+	}()
 	return nil 
 }
 
