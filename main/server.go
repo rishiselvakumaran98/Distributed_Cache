@@ -14,6 +14,7 @@ import (
 type ServerOpts struct {
 	ListenAddr string
 	IsLeader   bool
+	LeaderAddr string
 }
 
 type Server struct {
@@ -73,6 +74,7 @@ func (s *Server) handleCommand(conn net.Conn, rawCmd []byte) {
 		conn.Write([]byte(err.Error()))
 		return
 	}
+	fmt.Printf("Received Message: %s\n", msg.Cmd)
 	var value []byte
 	switch msg.Cmd {
 	case CMDSet:
@@ -87,8 +89,6 @@ func (s *Server) handleCommand(conn net.Conn, rawCmd []byte) {
 		conn.Write([]byte(err.Error()))
 		return
 	}
-
-
 
 }
 
