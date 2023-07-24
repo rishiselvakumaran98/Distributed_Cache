@@ -4,3 +4,5 @@ github.com/rishiselvakumaran98/Distributed_Cache/cache v0.0.0-20230724024638-c8a
 github.com/rishiselvakumaran98/Distributed_Cache/cache v0.0.0-20230724024638-c8a9ef541805/go.mod h1:HWQgN3zfdStgRDZQfDA6YAtl/0k5xb7dddJK+kjbtsg=
 github.com/rishiselvakumaran98/Distributed_Cache/cache v0.0.0-20230724032626-519d24aa2b60 h1:sq9yAFu+nDPz6sHW47UHpnqQ4Cqp7uyH6YDV7yluRGQ=
 github.com/rishiselvakumaran98/Distributed_Cache/cache v0.0.0-20230724032626-519d24aa2b60/go.mod h1:HWQgN3zfdStgRDZQfDA6YAtl/0k5xb7dddJK+kjbtsg=
+github.com/rishiselvakumaran98/Distributed_Cache/cache v0.0.0-20230724044113-865b404587ef h1:zQFTV9gm8MwDyL8GhWPi65zqWjap78QUnKG48osU4ww=
+github.com/rishiselvakumaran98/Distributed_Cache/cache v0.0.0-20230724044113-865b404587ef/go.mod h1:HWQgN3zfdStgRDZQfDA6YAtl/0k5xb7dddJK+kjbtsg=
